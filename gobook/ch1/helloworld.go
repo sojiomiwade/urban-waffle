@@ -3,5 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Hello World")
+  a:=2
+  b:=0
+  a=a/b
 }
