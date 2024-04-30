@@ -3,13 +3,14 @@
 package main
 
 import "fmt"
-func main()   {
-  for i := 0; i < 5; i++ {
-		a:=2
-		b:=1
+
+func main() {
+	for i := 0; i < 5; i++ {
+		a := 2
+		b := 1
 		// a=a/b
 		a = a +
-		b;
-    fmt.Println("Hello, World!",a)
+			b
+		fmt.Println("Hello, World!", a)
 	}
 }
