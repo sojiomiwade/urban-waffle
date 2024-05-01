@@ -26,7 +26,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error %q\n for file %s\n", err, filename)
       } else {
 datas:=string(data)
-fmt.Printf("%q",datas)
+fmt.Printf("%q,%d,%d\n",datas,len(datas),len(data))
 lines:=strings.Split(datas,"\n")
 fmt.Println(lines,len(lines))
         for _, line := range lines {
