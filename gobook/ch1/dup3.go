@@ -25,7 +25,9 @@ func main() {
       if err != nil {
         fmt.Fprintf(os.Stderr, "Error %q\n for file %s\n", err, filename)
       } else {
-lines:=strings.Split(string(data),"\n")
+datas:=string(data)
+fmt.Printf("%q",datas)
+lines:=strings.Split(datas,"\n")
 fmt.Println(lines,len(lines))
         for _, line := range lines {
           count[line] ++
