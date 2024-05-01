@@ -15,13 +15,28 @@ import (
 
 func main() {
 	count := make(map[string]int)
-	scanner := bufio.NewScanner(os.Stdin)
-	for scanner.Scan() {
-		count[scanner.Text()] += 1
+	if len(os.Args[1:]) == 0 {
+		countLines(os.Stdin, count)
+	} else {
+		for _, filename := range os.Args[1:] {
+			fp, err := os.Open(filename)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "Error %v: file %s", err, filename)
+			} else {
+				countLines(fp, count)
+			}
+		}
 	}
 	for line, linecount := range count {
 		if linecount > 1 {
 			fmt.Printf("%d\t%s\n", linecount, line)
 		}
+	}
+}
+
+func countLines(file *os.File, count map[string]int) {
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		count[scanner.Text()] += 1
 	}
 }
