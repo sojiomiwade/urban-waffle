@@ -21,9 +21,10 @@ func main() {
 		for _, filename := range os.Args[1:] {
 			fp, err := os.Open(filename)
 			if err != nil {
-				fmt.Fprintf(os.Stderr, "Error %v: file %s", err, filename)
+				fmt.Fprintf(os.Stderr, "Error %v: file %s\n", err, filename)
 			} else {
 				countLines(fp, count)
+				fp.Close()
 			}
 		}
 	}
