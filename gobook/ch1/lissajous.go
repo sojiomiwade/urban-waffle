@@ -12,11 +12,14 @@ import (
 	"os"
 )
 
-var palette = []color.Color{color.White, color.Black}
+var palette = []color.Color{
+	color.Black,
+	color.RGBA{0, 0xff, 0, 0xff},
+}
 
 const (
-	whiteIndex = 0 // first color in palette
-	blackIndex = 1 // next color in palette
+	blackIndex = 0 // first color in palette
+	greenIndex = 1
 )
 
 func main() {
@@ -43,7 +46,7 @@ func lissajous(out io.Writer) {
 			img.SetColorIndex(
 				size+int(x*size+.5),
 				size+int(y*size+.5),
-				blackIndex,
+				greenIndex,
 			)
 		}
 		phase += .1
