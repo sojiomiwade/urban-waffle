@@ -3,7 +3,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 )
@@ -16,13 +16,13 @@ func main() {
 			os.Exit(1)
 		}
 		body := resp.Body
-		bs, err := ioutil.ReadAll(body)
+		written, err := io.Copy(os.Stdout, body)
 		body.Close()
 		if err != nil {
-			fmt.Fprintln(os.Stderr, "ReadAll for url %s: %s", url, err)
+			fmt.Fprintln(os.Stderr, "copy failed for url %s: %s", url, err)
 			os.Exit(1)
 		}
-		fmt.Printf("URL: %s. Body: \n %s\n", bs)
+		fmt.Printf("URL: %s, number of bytes read: %d\n", url, written)
 
 	}
 }
