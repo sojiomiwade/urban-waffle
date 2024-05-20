@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 )
 
@@ -43,7 +44,7 @@ jj
 jj
 */
 func countLines(
-	file *os.File,
+	file io.Reader,
 	count map[string]int,
 	files map[string]map[string]bool,
 	filename string,
