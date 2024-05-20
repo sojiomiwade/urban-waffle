@@ -13,11 +13,11 @@ func main() {
 }
 
 func fish(f1 os.File, f2 *os.File) {
-  fmt.Fprintf(&f1,"Hello %s\n", f1.Name())
-	fmt.Fprintf(f2,"Hello %s\n", f2.Name())
+	fmt.Fprintf(&f1, "Hello %s\n", f1.Name())
+	fmt.Fprintf(f2, "Hello %s\n", f2.Name())
 	rice(f2)
 	rice(&f1)
-	
+
 }
 
 func rice(writer io.Writer) {

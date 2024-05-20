@@ -8,37 +8,37 @@
 package main
 
 import (
-  "fmt"
-  "io/ioutil"
-  "os"
-  "strings"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"strings"
 )
 
 func main() {
-  count := make(map[string]int)
-  fnames := os.Args[1:]
-  if len(fnames) > 0 {
+	count := make(map[string]int)
+	fnames := os.Args[1:]
+	if len(fnames) > 0 {
 
 		fmt.Println(fnames)
-    for _, filename := range fnames {
-      data, err := ioutil.ReadFile(filename)
-      if err != nil {
-        fmt.Fprintf(os.Stderr, "Error %q\n for file %s\n", err, filename)
-      } else {
-datas:=string(data)
-fmt.Printf("%q,%d,%d\n",datas,len(datas),len(data))
-lines:=strings.Split(datas,"\n")
-fmt.Println(lines,len(lines))
-        for _, line := range lines {
-          count[line] ++
-        }
-      }
-    }
+		for _, filename := range fnames {
+			data, err := ioutil.ReadFile(filename)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "Error %q\n for file %s\n", err, filename)
+			} else {
+				datas := string(data)
+				fmt.Printf("%q,%d,%d\n", datas, len(datas), len(data))
+				lines := strings.Split(datas, "\n")
+				fmt.Println(lines, len(lines))
+				for _, line := range lines {
+					count[line]++
+				}
+			}
+		}
 
-    for line, linecount := range count {
-      if linecount > 1 {
-        fmt.Printf("%d\t%s\n", linecount, line)
-      }
-    }
-  }
+		for line, linecount := range count {
+			if linecount > 1 {
+				fmt.Printf("%d\t%s\n", linecount, line)
+			}
+		}
+	}
 }
