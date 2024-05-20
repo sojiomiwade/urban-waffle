@@ -24,7 +24,7 @@ func main() {
 		_, err = io.Copy(os.Stdout, body)
 		body.Close()
 		if err != nil {
-			fmt.Fprintln(os.Stderr, "copy failed for url %s: %s", url, err)
+			fmt.Fprintf(os.Stderr, "copy failed for url %s: %s", url, err)
 			os.Exit(1)
 		}
 		// fmt.Printf("URL: %s, number of bytes read: %d, http status code: %d\n", url, written, resp.StatusCode)
