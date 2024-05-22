@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"image/color"
 	"image/gif"
@@ -9,6 +10,8 @@ import (
 	"math"
 	"math/rand"
 	"net/http"
+	"strconv"
+	"strings"
 )
 
 func main() {
@@ -17,7 +20,26 @@ func main() {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	lissajous(w)
+	if err := r.ParseForm(); err != nil {
+		log.Print(err)
+	}
+
+	cycles := 5
+	for k, v := range r.Form {
+		fmt.Printf("Form[%q] = %q\n", k, v)
+	}
+	if scycles := r.Form["cycles"]; scycles != nil {
+		sscycles := strings.Join(scycles, "-")
+		cycles, _ = strconv.Atoi(sscycles)
+	}
+	nframes := 64
+	if snframes := r.Form["nframes"]; snframes != nil {
+		ssnframes := strings.Join(snframes, "-")
+		nframes, _ = strconv.Atoi(ssnframes)
+	}
+	fmt.Printf("cycles: %d, nframes: %d\n", cycles, nframes)
+	lissajous(w, cycles, nframes)
+	fmt.Println("\n\n")
 }
 
 // RGBA colors courtesy of https://www.color-hex.com/color-palette/1017391
@@ -31,13 +53,13 @@ var palette = []color.Color{
 	color.RGBA{61, 133, 198, 0xff},
 }
 
-func lissajous(out io.Writer) {
+func lissajous(out io.Writer, cycles int, nframes int) {
 	const (
-		cycles  = 5    //number of complete x oscillator revolutions
-		res     = .001 //   angular resolution
-		size    = 100  //  image canvas covers [-size..+size]
-		nframes = 64   // number of animation frames
-		delay   = 8    //delay between frames in 10ms units
+		// cycles  = 5    //number of complete x oscillator revolutions
+		res  = .001 //   angular resolution
+		size = 100  //  image canvas covers [-size..+size]
+		// nframes = 64   // number of animation frames
+		delay = 8 //delay between frames in 10ms units
 	)
 	freq := rand.Float64() * 3.0 //relative frequency of y oscillator
 	anim := gif.GIF{LoopCount: nframes}
@@ -66,7 +88,7 @@ func lissajous(out io.Writer) {
 		  once you go past the mark, (that is t goes past mark), add sliceWidth to mark; inc coloridx
 
 		*/
-		for t := 0.0; t < 2*math.Pi*cycles; t += res {
+		for t := 0.0; t < 2*math.Pi*float64(cycles); t += res {
 			x := math.Sin(t)
 			y := math.Sin(t*freq + phase)
 			img.SetColorIndex(

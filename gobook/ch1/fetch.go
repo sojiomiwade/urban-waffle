@@ -21,7 +21,8 @@ func main() {
 			os.Exit(1)
 		}
 		body := resp.Body
-		_, err = io.Copy(os.Stdout, body)
+		// _, err = io.Copy(os.Stdout, body)
+		_, err = io.Copy(io.Discard, body)
 		body.Close()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "copy failed for url %s: %s", url, err)
