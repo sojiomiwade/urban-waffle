@@ -3,12 +3,12 @@ package main
 import (
     "fmt"
 
-    "oluwasoji.com/greetings"
+"foobar"
 )
 
 func main() {
     // Get a greeting message and print it.
-    message := greetings.Hello("Gladys")
-    greetings.Helloworld()
+    message := fish.Hello("Gladys")
+    fish.Helloworld()
     fmt.Println(message)
 }

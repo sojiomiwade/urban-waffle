@@ -1,4 +1,4 @@
-package greetings
+package fish
 import "fmt"
 
 
