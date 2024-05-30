@@ -22,3 +22,6 @@ go.work
 
 #mac directory settings dir
 .DS_Store
+
+# Vim swp file while editor still open
+*.swp
