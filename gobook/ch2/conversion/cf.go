@@ -11,13 +11,15 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"/Users/soji/urban-waffle/gobook/ch2/tempconv"
+	"example/user/conversion/tempconv"
 )
 
+
 func main() {
-	for temp, _ := range os.Args[1:] {
-		var tempF Fahrenheit = temp
-		var tempC Celsius = temp
+	for _,tempString := range os.Args[1:] {
+		temp,_ := strconv.ParseFloat(tempString,64)
+		tempF:=tempconv.Fahrenheit(temp)
+		tempC:=tempconv.Celsius(temp)
 		fmt.Printf("%s = %s, ", tempF, tempconv.FToC(tempF))
 		fmt.Printf("%s = %s\n", tempC, tempconv.CToF(tempC))
 	}

@@ -1,9 +1,6 @@
 // Package tempconv performs Celsius and Fahrenheit conversions
 package tempconv
 
-import "fmt"
-
-
 func CToK(c Celsius) Kelvin {
   return Kelvin(c-AbsoluteZeroC)
 }
@@ -23,7 +20,7 @@ func FToK(f Fahrenheit) Kelvin {
 // CToF converts a Celsius temparature to a Fahrenheit
 func CToF(c Celsius) Fahrenheit {
 	// 0 -> 32 9/5
-	return Fahrenheit(9/5*c+32) 
+	return Fahrenheit(9.0/5*c+32) 
 }
 
 //func FToC converts a Fahrenheit temparature to a Celsius
